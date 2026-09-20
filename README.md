@@ -117,6 +117,50 @@ Full specification and design decisions live in `docs/reference/` and
 - `docs/reference/sorry-api-mcp-spec.md` — MCP scope
 - `openspec/` — Proposal, capability specs, design, task tracking
 
+## Contributing
+
+**Pull requests are welcome.**
+
+SorryAPI is intentionally small, but human relationships are complicated.
+We welcome contributions that make SorryAPI more useful, more compatible,
+more reliable, or simply more ridiculous.
+
+Good contributions include: new OpenAI/Anthropic-compatible features, better
+streaming support, SDK examples, integration tests, Docker improvements,
+internationalization, new apology strategies, new kneeling modes, new HTTP
+status-code jokes, and better ways to detect when the AI should **shut up**.
+
+Before submitting a PR, ask yourself:
+
+> **Does this make SorryAPI smarter, funnier, or easier to use?**
+
+If yes, please send it. If the answer is:
+
+> **"I don't know, but it's funny."**
+
+Please send it anyway.
+
+What we don't need — please do not turn SorryAPI into an unnecessarily
+complicated enterprise platform. We are not currently looking for:
+
+* Kubernetes operators
+* Blockchain-based apology verification
+* AI-powered marriage analytics
+* Distributed kneeling clusters
+* Twelve-layer agent orchestration
+* A service mesh for emotional intelligence
+
+Unless, of course, someone manages to make one of those genuinely funny.
+
+## Credits
+
+| Role | Who |
+|------|-----|
+| First Author | ChatGPT |
+| Creator / Maintainer | Jimmy Yen |
+| Implementation | OpenCode |
+| Validation | 婚姻 |
+
 ## License
 
 MIT
