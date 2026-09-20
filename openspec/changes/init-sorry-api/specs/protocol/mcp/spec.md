@@ -14,13 +14,24 @@ SorryAPI SHALL embed the MCP server within the same process as the HTTP service.
 
 ### Requirement: Transport
 
-The MCP server SHALL use a standard MCP transport supported by the selected MCP SDK (practical for local development, Docker, Agent integration, and automated testing). The implementation SHALL NOT invent a custom MCP protocol.
+The MCP server SHALL support both STDIO and Streamable HTTP transports (user decision: option C), switchable via CLI flag or environment variable. STDIO mode SHALL be activated with `--mcp stdio` (exclusive process I/O); Streamable HTTP mode SHALL embed the MCP endpoint into the Axum router at `/mcp` sharing the same port as the HTTP API. Default behavior SHALL start the HTTP API with the Streamable HTTP MCP endpoint enabled. The implementation SHALL NOT invent a custom MCP protocol.
 
-#### Scenario: Standard transport used
+#### Scenario: STDIO transport
 
-- **WHEN** an MCP-compatible client connects
-- **THEN** the connection uses the standard MCP transport selected by the implementation
-- **AND** the protocol handshake follows the MCP specification
+- **WHEN** the binary is launched with `--mcp stdio`
+- **THEN** the MCP server communicates over standard input/output
+- **AND** an MCP client configured with `command: sorry-api` can connect
+
+#### Scenario: Streamable HTTP transport
+
+- **WHEN** the service starts with default configuration (or `--mcp http`)
+- **THEN** the MCP endpoint is available at `/mcp` on the same port as the HTTP API
+- **AND** an MCP client can connect via Streamable HTTP
+
+#### Scenario: HTTP API and MCP coexist
+
+- **WHEN** both HTTP API and Streamable HTTP MCP are active
+- **THEN** they share the same process and port without interference
 
 ### Requirement: Tool: kneel
 

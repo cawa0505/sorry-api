@@ -23,11 +23,12 @@
 
 ## 4. MCP 層 (MCP Capability Server)
 
-- [ ] 4.1 加入 MCP SDK 依賴（官方 rmcp crate，STDIO transport），驗證 `cargo check` 通過
+- [ ] 4.1 加入 MCP SDK 依賴（官方 rmcp crate，STDIO + Streamable HTTP transport features），驗證 `cargo check` 通過
 - [ ] 4.2 實作 tools：`kneel` / `apologize` / `shut_up` / `sorry`（直接呼叫 Action core，不 self-HTTP-call），驗證各 tool 回傳值與 MCP 規格一致且確定性成立
 - [ ] 4.3 實作 tool metadata（name、description、inputSchema `{"type":"object","properties":{},"additionalProperties":false}`），驗證 `tools/list` 可完整探索四個 tools
 - [ ] 4.4 實作 resources：`sorry://capabilities`（必做）與 `sorry://philosophy`（選做），驗證 `resources/read` 回傳正確內容
 - [ ] 4.5 錯誤處理：未知 tool / 無效參數回傳標準 MCP 錯誤語義（不得使用搞笑 HTTP status 作為 MCP 錯誤），驗證 `tools/call` 帶不存在的 tool 名稱可得 protocol error
+- [ ] 4.6 實作雙 transport：STDIO（`--mcp stdio`）與 Streamable HTTP（內嵌 Axum router `/mcp` endpoint，與 HTTP API 同 port），驗證兩種模式皆可被 MCP client 連線
 
 ## 5. Demo 端點與路由 (Server & Demo)
 

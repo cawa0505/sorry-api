@@ -85,7 +85,12 @@ MCP Server (same process)
 **Rationale:**
 Tool handler 呼叫與 demo 端點相同的內部函式（`execute_kneel()` 等），證明 Capability core 真正可重用；避免 self-HTTP-call 造成的迴圈依賴與不必要的序列化開銷。`sorry` tool 即依序執行 kneel → apologize → shut_up 並回傳完整 action 序列。
 
-**選型**：採用官方 Rust MCP SDK（`rmcp`, crate 名稱以實作時 crates.io 最新穩定版為準），STDIO transport（local dev / Docker / Agent 整合 / 自動化測試皆實用）。若 SDK 生態有變，改選知名社群 SDK，不自行發明協議。
+**選型**：採用官方 Rust MCP SDK（`rmcp`, crate 名稱以實作時 crates.io 最新穩定版為準）。**Transport 支援 STDIO 與 Streamable HTTP 雙模式**（用戶決策：方案 C），以 CLI flag 或環境變數切換：
+- STDIO：`sorry-api --mcp stdio`（Agent 於 MCP 設定檔以 `command` 啟動；Docker 場景配合 `docker exec -i`）。
+- Streamable HTTP：`sorry-api --mcp http`（內嵌於 Axum router，與 HTTP API 同 port 共用 `/mcp` endpoint；rmcp `transport-streamable-http-server` feature）。
+- 預設行為：同時啟動 HTTP API + Streamable HTTP MCP endpoint；STDIO 僅在明確 flag 時啟用（獨佔進程 I/O）。
+
+不自行發明協議；SDK 替換時僅動 `protocol/mcp` 模組。
 
 ### 3. Intelligence Engine 與 Action Trait
 ```rust
