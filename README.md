@@ -1,12 +1,19 @@
 # SorryAPI
 
-A serious AI infrastructure project whose core insight is that the optimal
-response to interpersonal conflict is: **kneel, apologize, shut up.**
+## We are building a super-intelligent AI.
 
-SorryAPI is a real, deployable API service that exposes a deliberately
-humorous but fully functional intelligence core. It is OpenAI- and
-Anthropic-compatible, supports SSE streaming, and ships an MCP server so
-agents can integrate its (only) three actions programmatically.
+After extensive research, we found that the optimal response to many complex
+interpersonal situations is:
+
+```text
+KNEEL
+```
+
+SorryAPI is the production-grade result of that research: a real, deployable
+API service exposing a deliberately humorous but fully functional
+intelligence core. It is OpenAI- and Anthropic-compatible, supports SSE
+streaming, and ships an MCP server so agents can integrate its (only) three
+actions programmatically.
 
 ## What it does
 
@@ -19,6 +26,15 @@ SorryAPI responds with the canonical apology:
 
 Always. It never argues back. No `但是`, no `可是`, no `其實`, no
 `according to my analysis`. The determinism is the entire point (spec §6).
+
+## Features
+
+- **OpenAI-compatible** — `POST /v1/chat/completions`, non-streaming + SSE
+- **Anthropic-compatible** — `POST /v1/messages`, non-streaming + SSE event stream
+- **MCP server** — 4 tools + 2 resources over STDIO or Streamable HTTP
+- **Deterministic intelligence** — zero hallucinations, zero arguing back
+- **Stateless** — no database, no auth, no external LLM; the wisdom is built in
+- **Small** — the runtime image is ~10 MB and the apology is ~20 bytes
 
 ## Quick start
 
@@ -50,6 +66,26 @@ Example:
 curl localhost:8080/v1/chat/completions \
   -H 'content-type: application/json' \
   -d '{"model":"gpt-4","messages":[{"role":"user","content":"我老婆生氣了怎麼辦"}]}'
+```
+
+Anthropic-compatible:
+
+```bash
+curl localhost:8080/v1/messages \
+  -H 'content-type: application/json' \
+  -d '{"model":"claude-sonnet-4-5","max_tokens":100,"messages":[{"role":"user","content":"我老婆生氣了怎麼辦"}]}'
+```
+
+Streaming (`"stream": true`) works on both and ends with the conclusion.
+The content may appear overly sophisticated before arriving at it:
+
+```text
+Analyzing context...
+Evaluating historical interaction...
+Considering possible responses...
+Calculating optimal strategy...
+
+Kneel.
 ```
 
 ## MCP
@@ -117,6 +153,32 @@ Full specification and design decisions live in `docs/reference/` and
 - `docs/reference/sorry-api-mcp-spec.md` — MCP scope
 - `openspec/` — Proposal, capability specs, design, task tracking
 
+## Roadmap
+
+Distinguish carefully: checked items are engineering commitments. Unchecked
+items are jokes. Mostly.
+
+- [x] Kneel
+- [x] Apologize
+- [x] Shut up
+- [ ] Multimodal kneeling
+- [ ] Distributed kneeling
+- [ ] Kubernetes-native kneeling
+- [ ] Autonomous kneeling
+- [ ] AGI
+
+## AI Philosophy
+
+> The intelligence of an AI is not measured by how much it can say.
+>
+> It is measured by knowing when not to say anything.
+
+> AGI is hard.
+>
+> Kneeling is easy.
+>
+> We chose the shortest path to intelligence.
+
 ## Contributing
 
 **Pull requests are welcome.**
@@ -151,6 +213,16 @@ complicated enterprise platform. We are not currently looking for:
 * A service mesh for emotional intelligence
 
 Unless, of course, someone manages to make one of those genuinely funny.
+
+## Donate
+
+If SorryAPI has ever saved you from explaining yourself for another 20
+minutes, consider buying the maintainer a coffee.
+
+Your contribution helps us continue researching the most important problem
+in artificial intelligence:
+
+**knowing when to kneel.**
 
 ## Credits
 
