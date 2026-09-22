@@ -1,3 +1,7 @@
 # guardrail-mcp (local state)
 .opencode/
 /target/
+# Code Relay (local state)
+relay.json
+RESUME.md
+next_step.md
