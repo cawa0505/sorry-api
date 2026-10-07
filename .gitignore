@@ -3,5 +3,6 @@
 /target/
 # Code Relay (local state)
 relay.json
+.relay/
 RESUME.md
 next_step.md
